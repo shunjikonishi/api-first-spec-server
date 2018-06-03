@@ -4,6 +4,8 @@ module.exports = function(grunt) {
   require('load-grunt-tasks')(grunt);
   require('time-grunt')(grunt);
 
+  const webpackConfig = require("./webpack.config");
+
   grunt.initConfig({
     ts: {
       app: {
@@ -15,7 +17,7 @@ module.exports = function(grunt) {
         configuration: "tslint.json"
       },
       files: {
-        src: ["server/**/*.ts"]
+        src: ["backend/**/*.ts"]
       }
     },
     express: {
@@ -27,7 +29,7 @@ module.exports = function(grunt) {
     },
     watch: {
       ts: {
-        files: ["server/**/*.ts"],
+        files: ["backend/**/*.ts"],
         tasks: ["ts", "tslint"]
       },
       express: {
@@ -37,6 +39,13 @@ module.exports = function(grunt) {
           spawn: false
         }
       }
+    },
+    webpack: {
+      options: {
+        stats: !process.env.NODE_ENV || process.env.NODE_ENV === 'development'
+      },
+      prod: webpackConfig,
+      dev: Object.assign({ watch: true }, webpackConfig)
     }
   });
 
@@ -44,6 +53,7 @@ module.exports = function(grunt) {
     "ts",
     "tslint",
     "express",
+    "webpack:dev",
     "watch"
   ]);
 

@@ -1,10 +1,11 @@
 import express  from "express";
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 7000;
 const app = express();
 
-app.set("views", "server/views");
+app.set("views", "backend/views");
 app.set("view engine", "ejs");
+app.use("/assets", express.static("assets"));
 
 app.get("/*", (req, res) => {
   res.render("index", {

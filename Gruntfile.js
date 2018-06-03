@@ -28,9 +28,13 @@ module.exports = function(grunt) {
       }
     },
     watch: {
-      ts: {
+      backend: {
         files: ["backend/**/*.ts"],
         tasks: ["ts", "tslint"]
+      },
+      frontend: {
+        files: ["frontend/**/*.*"],
+        tasks: ["webpack"]
       },
       express: {
         files: ["dist/**/*.js"],
@@ -45,21 +49,33 @@ module.exports = function(grunt) {
         stats: !process.env.NODE_ENV || process.env.NODE_ENV === 'development'
       },
       prod: webpackConfig,
-      dev: Object.assign({ watch: true }, webpackConfig)
-    }
+      dev: Object.assign({ 
+        failOnError: true,
+        cache: true
+      }, webpackConfig)
+    },
+    concurrent: {
+      backend: {
+        tasks: ["tslint", "ts", "watch"],
+        options: {
+          logConcurrentOutput: true
+        }
+      },
+      frontend: {
+        tasks: ["webpack:dev"],
+        options: {
+          logConcurrentOutput: true
+        }
+      }
+    },
   });
 
-  grunt.registerTask("develop", [
-    "ts",
-    "tslint",
-    "express",
-    "webpack:dev",
-    "watch"
-  ]);
+  grunt.registerTask("develop", ["tslint", "ts", "express", "watch"]);
 
   grunt.registerTask("build", [
+    "tslint",
     "ts",
-    "tslint"
+    "webpack:prod",
   ]);
 
 };

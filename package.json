@@ -17,10 +17,11 @@
     "typescript": "^2.8.3"
   },
   "dependencies": {
+    "api-first-spec": "^1.0.2",
     "ejs": "^2.6.1",
     "elm-webpack-loader": "^4.5.0",
     "express": "^4.16.3",
-    "grunt": "^1.0.2",
+    "grunt": "^1.0.3",
     "grunt-contrib-watch": "^1.1.0",
     "grunt-express-server": "^0.5.4",
     "grunt-ts": "^6.0.0-beta.19",
@@ -30,6 +31,7 @@
     "time-grunt": "^1.4.0",
     "ts-loader": "^4.3.0",
     "tslint": "^5.10.0",
+    "walk": "^2.3.13",
     "webpack": "^4.10.2"
   }
 }

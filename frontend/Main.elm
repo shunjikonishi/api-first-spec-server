@@ -1,64 +1,27 @@
 module Main exposing(main)
 
-import Html exposing (Html, div, button, text, program)
-import Html.Events exposing (onClick)
-import Random
+import Html exposing (Html, div, text, program)
+import Messages exposing (Msg(..))
+import Models exposing (Model, initialModel)
+import Update exposing (update)
+import View exposing (view)
 
-
--- モデル
-
-
-type alias Model =
-    Int
-
+import SpecListing.Commands exposing (fetchAll)
 
 init : ( Model, Cmd Msg )
 init =
-    ( 1, Cmd.none )
+    ( initialModel, Cmd.map SpecListingMsg fetchAll )
 
-
--- メッセージ
-
-
-type Msg
-    = Roll
-    | OnResult Int
-
-
-
--- VIEW
-
-
-view : Model -> Html Msg
-view model =
-    div []
-        [ button [ onClick Roll ] [ text "Roll" ]
-        , text (toString model)
-        ]
-
-
-
--- 更新
-
-
-update : Msg -> Model -> ( Model, Cmd Msg )
-update msg model =
-    case msg of
-        Roll ->
-            ( model, Random.generate OnResult (Random.int 1 6) )
-
-        OnResult res ->
-            ( res, Cmd.none )
-
+subscriptions : Model -> Sub Msg
+subscriptions model =
+    Sub.none
 
 -- MAIN
 
-
-main : Program Never Model Msg
 main =
     program
         { init = init
         , view = view
         , update = update
-        , subscriptions = (always Sub.none)
+        , subscriptions = subscriptions
         }

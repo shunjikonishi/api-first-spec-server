@@ -8,7 +8,7 @@ import SpecListing.Views.List
 
 view : Model -> Html Msg
 view model =
-  page model
+    page model
 
 
 page : Model -> Html Msg

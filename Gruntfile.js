@@ -34,7 +34,7 @@ module.exports = function(grunt) {
       },
       frontend: {
         files: ["frontend/**/*.*"],
-        tasks: ["webpack"]
+        tasks: ["shell:elm_format", "webpack"]
       },
       express: {
         files: ["dist/**/*.js"],
@@ -66,6 +66,11 @@ module.exports = function(grunt) {
         options: {
           logConcurrentOutput: true
         }
+      }
+    },
+    shell: {
+      elm_format: {
+        command: "elm-format --yes frontend/"
       }
     },
   });

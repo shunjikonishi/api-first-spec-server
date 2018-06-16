@@ -1,7 +1,7 @@
 module SpecListing.Views.List exposing(view)
 
 import Html exposing (..)
-import Html.Attributes exposing (class)
+import Html.Attributes exposing (class, attribute, title)
 import SpecListing.Messages exposing (..)
 import SpecListing.Models exposing (SpecListing)
 
@@ -13,6 +13,12 @@ view specs =
       ]
 
 specItem: SpecListing -> Html Msg
-specItem spec =
-  li []
-     [text spec.method, text " ", text spec.endpoint]
+specItem spec = 
+  let
+     attributes = case spec.description of
+       Just v -> [title v]
+       Nothing -> []
+  in
+    li 
+      attributes
+      [ text (spec.name ++ "(" ++ spec.method ++ ")")]

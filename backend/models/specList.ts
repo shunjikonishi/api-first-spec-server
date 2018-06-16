@@ -4,6 +4,8 @@ import path from "path";
 export interface SpecListing {
   endpoint: string;
   method: string;
+  name: string;
+  description?: string;
 }
 export default class SpecList {
 
@@ -37,7 +39,9 @@ export default class SpecList {
     return this.specList.map(v => {
       return {
         endpoint: v.endpoint,
-        method: v.method
+        method: v.method,
+        name: v.name,
+        description: v.description
       };
     });
   }

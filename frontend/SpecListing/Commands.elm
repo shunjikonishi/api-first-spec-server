@@ -19,6 +19,8 @@ collectionDecoder =
 
 memberDecoder: Decode.Decoder SpecListing
 memberDecoder = 
-  Decode.map2 SpecListing
+  Decode.map4 SpecListing
     (field "endpoint" Decode.string)
     (field "method" Decode.string)
+    (field "name" Decode.string)
+    (Decode.maybe <| field "description" Decode.string)

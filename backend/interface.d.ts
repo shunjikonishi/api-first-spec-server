@@ -6,6 +6,8 @@ declare module "walk" {
 declare namespace ApiFirstSpec {
 
   interface ApiConfig {
+    name?: string;
+    description?: string;
     endpoint: string;
     method: string;
     request: RequestConfig;

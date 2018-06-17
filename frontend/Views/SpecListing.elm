@@ -1,4 +1,4 @@
-module SpecListing.View exposing (listView)
+module Views.SpecListing exposing (listView)
 
 import Html exposing (..)
 import Html.Attributes exposing (class, attribute, title)
@@ -9,8 +9,8 @@ import Sorting.Models exposing (Sorting, Direction(..))
 
 listView : List SpecListing -> Sorting -> Html Msg
 listView specs sorting =
-    div []
-        [ h2 [ class "spec-listing-title" ] [ text "Specs" ]
+    div [ class "specListing" ]
+        [ h2 [ class "specListing-title" ] [ text "Specs" ]
         , listHeader sorting
         , ul [] (List.map specItem specs)
         ]
@@ -34,7 +34,7 @@ specItem spec =
 
 listHeader : Sorting -> Html Msg
 listHeader sorting =
-    div []
+    div [ class "specListing-header" ]
         [ text "sort"
         , sortButton sorting "name"
         , sortButton sorting "endpoint"
@@ -44,22 +44,12 @@ listHeader sorting =
 
 sortButton : Sorting -> String -> Html Msg
 sortButton sorting target =
-    let
-        directionMark =
-            case sorting.direction of
-                Asc ->
-                    "🔻"
-
-                Desc ->
-                    "🔺"
-    in
-        if sorting.field == target then
-            button
-                [ class "acitve btn btn-primary"
-                ]
-                [ text (target ++ " " ++ directionMark) ]
-        else
-            button
-                [ class "btn btn-primary"
-                ]
-                [ text target ]
+    if sorting.field == target then
+        button
+            [ class ("acitve btn btn-primary btn-sm " ++ (sorting.direction |> toString |> String.toLower)) ]
+            [ text target ]
+    else
+        button
+            [ class "btn btn-outline-primary btn-sm"
+            ]
+            [ text target ]

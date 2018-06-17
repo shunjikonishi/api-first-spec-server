@@ -1,0 +1,19 @@
+.specListing {
+  &-title {
+    background: red;
+  }
+
+  &-header {
+    button {
+      margin-left: 10px;
+      &.asc:after {
+        content: "▼";
+        padding-left: 2px;
+      }
+      &.desc:after {
+        content: "▲";
+        padding-left: 2px;
+      }
+    }
+  }
+}

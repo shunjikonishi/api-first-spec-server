@@ -2,15 +2,19 @@ module SpecListing.Commands exposing (..)
 
 import Http
 import Json.Decode as Decode exposing (field)
-import Task
 import SpecListing.Models exposing (SpecListing)
 import SpecListing.Messages exposing (..)
+import Sorting.Models exposing (Sorting)
 
 
-fetchAll : Cmd Msg
-fetchAll =
-    Http.get fetchAllUrl collectionDecoder
-        |> Http.send OnFetchAll
+fetchAll : Sorting -> Cmd Msg
+fetchAll sorting =
+    let
+        query =
+            "&field=" ++ sorting.field ++ (toString sorting.direction |> String.toLower)
+    in
+        Http.get (fetchAllUrl ++ query) collectionDecoder
+            |> Http.send OnFetchAll
 
 
 fetchAllUrl =

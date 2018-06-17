@@ -3,7 +3,7 @@ module View exposing (..)
 import Html exposing (Html, div, text)
 import Messages exposing (Msg(..))
 import Models exposing (Model)
-import SpecListing.View exposing (listView)
+import Views.SpecListing exposing (listView)
 
 
 view : Model -> Html Msg

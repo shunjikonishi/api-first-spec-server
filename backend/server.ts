@@ -15,7 +15,7 @@ app.set("views", "backend/views");
 app.set("view engine", "ejs");
 app.use("/assets", express.static("assets"));
 
-app.get("/api/specs", GetSpecList.bind(this, specList));
+app.get("/api/specs", GetSpecList.bind(GetSpecList, specList));
 
 app.get("/*", (req, res) => {
   res.render("index", {

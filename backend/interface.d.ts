@@ -29,7 +29,7 @@ declare namespace ApiFirstSpec {
   }
 
   interface Api extends ApiConfig {
-
+    name: string;
   }
 }
 

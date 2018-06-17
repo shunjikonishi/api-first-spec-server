@@ -1,6 +1,7 @@
 import SpecList from "../models/specList";
+import {Request, Response} from "express";
 
-export default function(specList: SpecList, req: express.Request, res: express.Response) {
+export default function(specList: SpecList, req: Request, res: Response) {
   let sortField = req.query["sort.field"];
   const sortDirection = req.query["sort.direction"];
 

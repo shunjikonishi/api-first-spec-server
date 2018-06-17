@@ -1,9 +1,7 @@
-const Elm = require("./main.elm");
-
+const Elm = require("./Main.elm");
+require("./main.scss");
 
 document.addEventListener("DOMContentLoaded", () => {
   const mainDiv = document.getElementById("main");
-  console.log(Elm);
-  console.log(mainDiv);
   Elm.Main.embed(mainDiv);
 });

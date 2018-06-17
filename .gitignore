@@ -2,4 +2,4 @@ elm-stuff/
 .tscache/
 node_modules/
 dist/
-assets/bundle.js
+assets/bundle.*

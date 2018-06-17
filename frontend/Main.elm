@@ -10,16 +10,16 @@ import SpecListing.Commands exposing (fetchAll)
 
 init : ( Model, Cmd Msg )
 init =
-    ( initialModel, Cmd.map SpecListingMsg fetchAll )
+    let
+        model =
+            initialModel
+    in
+        ( model, Cmd.map SpecListingMsg (fetchAll model.specSorting) )
 
 
 subscriptions : Model -> Sub Msg
 subscriptions model =
     Sub.none
-
-
-
--- MAIN
 
 
 main =

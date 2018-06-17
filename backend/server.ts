@@ -1,6 +1,8 @@
 import express  from "express";
 import SpecList from "./models/specList";
 
+import GetSpecList from "./controllers/getSpecList";
+
 const PORT = process.env.PORT || 7000;
 const app = express();
 
@@ -13,13 +15,11 @@ app.set("views", "backend/views");
 app.set("view engine", "ejs");
 app.use("/assets", express.static("assets"));
 
-app.get("/api/specs", (req, res) => {
-  res.json(specList.list());
-});
+app.get("/api/specs", GetSpecList.bind(this, specList));
 
 app.get("/*", (req, res) => {
   res.render("index", {
-    title: "test"
+    title: "API-First-Spec Documents"
   });
 });
 

@@ -3,7 +3,7 @@ module View exposing (..)
 import Html exposing (Html, div, text)
 import Messages exposing (Msg(..))
 import Models exposing (Model)
-import SpecListing.Views.List
+import SpecListing.View exposing (listView)
 
 
 view : Model -> Html Msg
@@ -13,4 +13,4 @@ view model =
 
 page : Model -> Html Msg
 page model =
-    Html.map SpecListingMsg (SpecListing.Views.List.view model.specs)
+    Html.map SpecListingMsg (listView model.specs model.specSorting)

@@ -11,7 +11,7 @@ fetchAll : Sorting -> Cmd Msg
 fetchAll sorting =
     let
         query =
-            "&field=" ++ sorting.field ++ (toString sorting.direction |> String.toLower)
+            "?sort.field=" ++ sorting.field ++ "&sort.direction=" ++ (toString sorting.direction |> String.toLower)
     in
         Http.get (fetchAllUrl ++ query) collectionDecoder
             |> Http.send OnFetchAll

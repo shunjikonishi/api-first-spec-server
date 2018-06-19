@@ -13,4 +13,4 @@ view model =
 
 page : Model -> Html Msg
 page model =
-    Html.map SpecListingMsg (listView model.specs model.specSorting)
+    Html.map SortingMsg (listView model.specs model.specSorting)

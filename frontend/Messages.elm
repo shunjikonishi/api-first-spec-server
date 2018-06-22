@@ -1,9 +1,7 @@
 module Messages exposing (..)
 
-import SpecListing.Messages
-import Sorting.Messages
+import SpecList.Messages
 
 
 type Msg
-    = SpecListingMsg SpecListing.Messages.Msg
-    | SortingMsg Sorting.Messages.Msg
+    = SpecListMsg SpecList.Messages.Msg

@@ -1,9 +1,9 @@
-module SpecListing.Commands exposing (..)
+module SpecList.Commands exposing (..)
 
 import Http
 import Json.Decode as Decode exposing (field)
 import SpecListing.Models exposing (SpecListing)
-import SpecListing.Messages exposing (..)
+import SpecList.Messages exposing (..)
 import Sorting.Models exposing (Sorting)
 
 

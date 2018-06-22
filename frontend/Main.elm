@@ -5,7 +5,7 @@ import Messages exposing (Msg(..))
 import Models exposing (Model, initialModel)
 import Update exposing (update)
 import View exposing (view)
-import SpecListing.Commands exposing (fetchAll)
+import SpecList.Commands exposing (fetchAll)
 
 
 init : ( Model, Cmd Msg )
@@ -14,7 +14,7 @@ init =
         model =
             initialModel
     in
-        ( model, Cmd.map SpecListingMsg (fetchAll model.specSorting) )
+        ( model, Cmd.map SpecListMsg (fetchAll model.specList.sorting) )
 
 
 subscriptions : Model -> Sub Msg

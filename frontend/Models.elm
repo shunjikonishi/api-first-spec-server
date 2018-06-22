@@ -1,17 +1,16 @@
 module Models exposing (..)
 
-import SpecListing.Models exposing (SpecListing)
+import SpecList.Models exposing (SpecList)
 import Sorting.Models exposing (Sorting, Direction(..))
 
 
 type alias Model =
-    { specs : List SpecListing
-    , specSorting : Sorting
+    { specList : SpecList
     }
 
 
 initialModel : Model
 initialModel =
-    { specs = []
-    , specSorting = Sorting "endpoint" Asc
+    { specList =
+        SpecList (Sorting "endpoint" Asc) []
     }

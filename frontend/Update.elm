@@ -2,23 +2,15 @@ module Update exposing (..)
 
 import Messages exposing (Msg(..))
 import Models exposing (Model)
-import SpecListing.Update
-import Sorting.Update
+import SpecList.Update
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
-        SpecListingMsg subMsg ->
+        SpecListMsg subMsg ->
             let
-                ( updatedSpecs, cmd ) =
-                    SpecListing.Update.update subMsg model.specs
+                ( updatedSpecList, cmd ) =
+                    SpecList.Update.update subMsg model.specList
             in
-                ( { model | specs = updatedSpecs }, Cmd.map SpecListingMsg cmd )
-
-        SortingMsg subMsg ->
-            let
-                ( updatedSorting, cmd ) =
-                    Sorting.Update.update subMsg model.specSorting
-            in
-                ( { model | specSorting = updatedSorting }, Cmd.map SpecListingMsg cmd )
+                ( { model | specList = updatedSpecList }, Cmd.map SpecListMsg cmd )

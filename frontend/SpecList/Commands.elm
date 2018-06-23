@@ -18,7 +18,7 @@ fetchAll sorting =
 
 
 fetchAllUrl =
-    "http://localhost:7000/api/specs"
+    "/api/specs"
 
 
 collectionDecoder : Decode.Decoder (List SpecListing)

@@ -18,7 +18,7 @@ fetchAll sorting =
 
 
 fetchAllUrl =
-    "/api/specs"
+    "/api/specs/list"
 
 
 collectionDecoder : Decode.Decoder (List SpecListing)

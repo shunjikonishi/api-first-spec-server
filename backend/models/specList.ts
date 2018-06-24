@@ -45,5 +45,10 @@ export default class SpecList {
       };
     });
   }
+
+  public get(method: string, endpoint: string) {
+    return this.specList.find(v => v.method === method && v.endpoint === endpoint);
+  }
+
 }
 

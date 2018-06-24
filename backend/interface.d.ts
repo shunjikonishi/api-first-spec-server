@@ -15,6 +15,7 @@ declare namespace ApiFirstSpec {
   }
 
   interface RequestConfig {
+    strict?: boolean;
     contentType?: string;
     headers?: any;
     params?: any;
@@ -22,15 +23,87 @@ declare namespace ApiFirstSpec {
   }
 
   interface ResponseConfig {
-    strict: boolean;
+    strict?: boolean;
     contentType?: string;
     data: any;
     rules: any;
   }
 
-  interface Api extends ApiConfig {
+  interface Rule {
     name: string;
+    param: any;
   }
+
+  interface Param {
+    name: string;
+    type: string;
+    isArray: boolean;
+    rules: Array<Rule>;
+    hasChildren(): boolean;
+    childNames(): Array<string>;
+    hasRule(name: string): boolean;
+    getChild(name: string): Param;
+  }
+
+  interface Request {
+    strict: boolean;
+    contentType: string;
+    headers?: any;
+    params?: Param;
+  }
+
+  interface Response {
+    strict: boolean;
+    contentType: string;
+    headers?: any;
+    data?: Param;
+  }
+
+  interface Api {
+    name: string;
+    description?: string;
+    endpoint: string;
+    method: string;
+    urlParams?: Array<string>;
+    request: Request;
+    response: Response;
+  }
+}
+
+interface SerializedParam {
+  name: string;
+  type: string;
+  isArray: boolean;
+  rules?: Array<ApiFirstSpec.Rule>;
+  children?: SerializedParamHolder;
+}
+
+interface SerializedParamHolder {
+  [key: string]: SerializedParam;
+}
+
+interface SerializedRequest {
+  strict: boolean;
+  contentType: string;
+  headers?: any;
+  params?: SerializedParamHolder;
+}
+
+interface SerializedResponse {
+  strict: boolean;
+  contentType: string;
+  headers?: any;
+  data?: SerializedParamHolder;
+}
+
+interface SerializedApi {
+  name: string;
+  description?: string;
+  endpoint: string;
+  method: string;
+  urlParams?: Array<string>;
+  request: SerializedRequest;
+  response: SerializedResponse;
 }
 
 declare module "api-first-spec" {

@@ -5,7 +5,7 @@ import Html.Attributes exposing (class, title, href)
 import Html.Events.Extra exposing (onClickPreventDefault)
 import SpecList.Messages exposing (Msg(..))
 import SpecList.Models exposing (SpecList)
-import SpecListing.Models exposing (SpecListing)
+import SpecListing.Models exposing (..)
 import Sorting.Models exposing (Sorting, Direction(..))
 
 
@@ -31,7 +31,7 @@ specItem spec =
     in
         li
             attributes
-            [ text (spec.name ++ "(" ++ spec.method ++ ")") ]
+            [ text (spec.name ++ "(" ++ spec.method ++ ")" ++ (filename spec) ++ "---" ++ (dir spec)) ]
 
 
 listHeader : Sorting -> Html Msg

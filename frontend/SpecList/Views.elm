@@ -1,8 +1,8 @@
 module SpecList.Views exposing (listView)
 
 import Html exposing (..)
-import Html.Attributes exposing (class, title)
-import Html.Events exposing (onClick)
+import Html.Attributes exposing (class, title, href)
+import Html.Events.Extra exposing (onClickPreventDefault)
 import SpecList.Messages exposing (Msg(..))
 import SpecList.Models exposing (SpecList)
 import SpecListing.Models exposing (SpecListing)
@@ -36,7 +36,7 @@ specItem spec =
 
 listHeader : Sorting -> Html Msg
 listHeader sorting =
-    div [ class "specListing-header" ]
+    div [ class "specList-header" ]
         [ text "sort"
         , sortButton sorting "name"
         , sortButton sorting "endpoint"
@@ -47,9 +47,10 @@ listHeader sorting =
 sortButton : Sorting -> String -> Html Msg
 sortButton sorting target =
     if sorting.field == target then
-        button
-            [ class ("acitve btn btn-primary btn-sm " ++ (sorting.direction |> toString |> String.toLower))
-            , onClick
+        a
+            [ class ("badge badge-primary " ++ (sorting.direction |> toString |> String.toLower))
+            , href "#"
+            , onClickPreventDefault
                 (OnSort
                     (Sorting
                         target
@@ -63,8 +64,9 @@ sortButton sorting target =
             ]
             [ text target ]
     else
-        button
-            [ class "btn btn-outline-primary btn-sm"
-            , onClick (OnSort (Sorting target sorting.direction))
+        a
+            [ class "badge badge-secondary"
+            , href "#"
+            , onClickPreventDefault (OnSort (Sorting target sorting.direction))
             ]
             [ text target ]

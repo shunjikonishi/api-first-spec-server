@@ -4,8 +4,9 @@
   }
 
   &-header {
-    button {
-      margin-left: 10px;
+    a {
+      color: #FFF;
+      margin-left: 5px;
       &.asc:after {
         content: "▼";
         padding-left: 2px;

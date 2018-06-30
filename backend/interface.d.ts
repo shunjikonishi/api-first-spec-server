@@ -60,6 +60,7 @@ declare namespace ApiFirstSpec {
   }
 
   interface Api {
+    filepath?: string;
     name: string;
     description?: string;
     endpoint: string;

@@ -18,7 +18,7 @@ fetchAll sorting =
 
 
 fetchAllUrl =
-    "/api/specs/list"
+    "/api/specs"
 
 
 collectionDecoder : Decode.Decoder (List SpecListing)
@@ -28,7 +28,8 @@ collectionDecoder =
 
 memberDecoder : Decode.Decoder SpecListing
 memberDecoder =
-    Decode.map4 SpecListing
+    Decode.map5 SpecListing
+        (field "filepath" Decode.string)
         (field "endpoint" Decode.string)
         (field "method" Decode.string)
         (field "name" Decode.string)

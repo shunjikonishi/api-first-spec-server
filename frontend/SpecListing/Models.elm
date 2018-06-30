@@ -2,7 +2,8 @@ module SpecListing.Models exposing (..)
 
 
 type alias SpecListing =
-    { endpoint : String
+    { filepath : String
+    , endpoint : String
     , method : String
     , name : String
     , description : Maybe String

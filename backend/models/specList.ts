@@ -29,6 +29,7 @@ export default class SpecList {
       if (stat.name.endsWith(".spec.js")) {
         const path = `${root}/${stat.name}`;
         const api = require(path);
+        api.filepath = path.substring(this.baseDir.length - 1);
         this.specList.push(api);
       }
       next();
@@ -38,6 +39,7 @@ export default class SpecList {
   public list() {
     return this.specList.map(v => {
       return {
+        filepath: v.filepath,
         endpoint: v.endpoint,
         method: v.method,
         name: v.name,
@@ -46,9 +48,12 @@ export default class SpecList {
     });
   }
 
-  public get(method: string, endpoint: string) {
+  public getSpecByMethodAndEndpoint(method: string, endpoint: string) {
     return this.specList.find(v => v.method === method && v.endpoint === endpoint);
   }
 
+  public getSpecByFilepath(filepath: string) {
+    return this.specList.find(v => v.filepath === filepath);
+  }
 }
 

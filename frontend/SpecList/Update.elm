@@ -17,3 +17,6 @@ update message model =
 
         OnSort newSorting ->
             ( { model | sorting = newSorting }, fetchAll newSorting )
+
+        OnFilter str ->
+            ( { model | filter = str }, Cmd.none )

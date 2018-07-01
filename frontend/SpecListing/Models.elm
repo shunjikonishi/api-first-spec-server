@@ -31,3 +31,19 @@ filename spec =
 
             Nothing ->
                 ""
+
+
+filter : String -> SpecListing -> Bool
+filter str spec =
+    let
+        lower =
+            String.toLower str
+
+        len =
+            String.length str
+    in
+        len
+            == 0
+            || String.contains lower (String.toLower spec.method)
+            || String.contains lower (String.toLower spec.endpoint)
+            || String.contains lower (String.toLower spec.filepath)

@@ -6,5 +6,6 @@ import Sorting.Models exposing (Sorting)
 
 type alias SpecList =
     { sorting : Sorting
+    , filter : String
     , list : List SpecListing
     }

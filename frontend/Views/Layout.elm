@@ -4,7 +4,7 @@ import Html exposing (Html, div, nav, text, a)
 import Html.Attributes exposing (class, href)
 import Messages exposing (Msg(..))
 import Models exposing (Model)
-import SpecList.Views exposing (listView)
+import Views.SpecList exposing (listView)
 
 
 layout : Model -> Html Msg

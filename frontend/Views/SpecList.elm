@@ -22,15 +22,14 @@ listView specList =
             List.map dir specs |> List.Extra.unique
     in
         div [ class "specList" ]
-            [ h2 [ class "specList-title" ] [ text "Specs" ]
-            , listHeader specList.filter
+            [ listHeader specList.filter
             , dirList dirs specs
             ]
 
 
 dirList : List String -> List SpecListing -> Html Msg
 dirList dirs specs =
-    ul []
+    ul [ class "specList-dir-list" ]
         (List.map
             (dirItem specs)
             dirs
@@ -40,25 +39,19 @@ dirList dirs specs =
 dirItem : List SpecListing -> String -> Html Msg
 dirItem specs dirname =
     li [ class "specList-dir" ]
-        [ text dirname
-        , ul [] (List.filter (\x -> (dir x) == dirname) specs |> List.map specItem)
+        [ span [] [ text dirname ]
+        , ul [ class "specList-item-list" ] (List.filter (\x -> (dir x) == dirname) specs |> List.map specItem)
         ]
 
 
 specItem : SpecListing -> Html Msg
 specItem spec =
-    let
-        attributes =
-            case spec.description of
-                Just v ->
-                    [ title v ]
-
-                Nothing ->
-                    []
-    in
-        li
-            attributes
+    li
+        [ class "specList-item" ]
+        [ a
+            [ href "#" ]
             [ text (filename spec |> String.split "." |> List.head |> Maybe.withDefault (filename spec)) ]
+        ]
 
 
 listHeader : String -> Html Msg

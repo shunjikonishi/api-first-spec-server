@@ -14,7 +14,7 @@ init =
         model =
             initialModel
     in
-        ( model, Cmd.map SpecListMsg (fetchAll model.specList.sorting) )
+        ( model, Cmd.map SpecListMsg fetchAll )
 
 
 subscriptions : Model -> Sub Msg

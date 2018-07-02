@@ -7,5 +7,4 @@ import Sorting.Models exposing (Sorting)
 
 type Msg
     = OnFetchAll (Result Http.Error (List SpecListing))
-    | OnSort Sorting
     | OnFilter String

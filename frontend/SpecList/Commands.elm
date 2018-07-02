@@ -7,14 +7,10 @@ import SpecList.Messages exposing (..)
 import Sorting.Models exposing (Sorting)
 
 
-fetchAll : Sorting -> Cmd Msg
-fetchAll sorting =
-    let
-        query =
-            "?sort.field=" ++ sorting.field ++ "&sort.direction=" ++ (toString sorting.direction |> String.toLower)
-    in
-        Http.get (fetchAllUrl ++ query) collectionDecoder
-            |> Http.send OnFetchAll
+fetchAll : Cmd Msg
+fetchAll =
+    Http.get fetchAllUrl collectionDecoder
+        |> Http.send OnFetchAll
 
 
 fetchAllUrl =

@@ -12,5 +12,5 @@ type alias Model =
 initialModel : Model
 initialModel =
     { specList =
-        SpecList (Sorting "endpoint" Asc) "" []
+        SpecList "" []
     }

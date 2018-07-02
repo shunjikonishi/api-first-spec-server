@@ -15,8 +15,5 @@ update message model =
         OnFetchAll (Err error) ->
             ( model, Cmd.none )
 
-        OnSort newSorting ->
-            ( { model | sorting = newSorting }, fetchAll newSorting )
-
         OnFilter str ->
             ( { model | filter = str }, Cmd.none )

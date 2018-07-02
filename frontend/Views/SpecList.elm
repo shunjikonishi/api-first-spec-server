@@ -27,6 +27,22 @@ listView specList =
             ]
 
 
+listHeader : String -> Html Msg
+listHeader filter =
+    div [ class "specList-header" ]
+        [ searchInput filter
+        ]
+
+
+searchInput : String -> Html Msg
+searchInput str =
+    div
+        [ class "search" ]
+        [ i [ class "oi oi-magnifying-glass" ] []
+        , input [ type_ "text", class "form-control", placeholder "Search", value str, onInput OnFilter ] []
+        ]
+
+
 dirList : List String -> List SpecListing -> Html Msg
 dirList dirs specs =
     ul [ class "specList-dir-list" ]
@@ -51,48 +67,4 @@ specItem spec =
         [ a
             [ href "#" ]
             [ text (filename spec |> String.split "." |> List.head |> Maybe.withDefault (filename spec)) ]
-        ]
-
-
-listHeader : String -> Html Msg
-listHeader filter =
-    div [ class "specList-header" ]
-        [ searchInput filter
-        ]
-
-
-sortButton : Sorting -> String -> Html Msg
-sortButton sorting target =
-    if sorting.field == target then
-        a
-            [ class ("badge badge-primary " ++ (sorting.direction |> toString |> String.toLower))
-            , href "#"
-            , onClickPreventDefault
-                (OnSort
-                    (Sorting
-                        target
-                        (if sorting.direction == Asc then
-                            Desc
-                         else
-                            Asc
-                        )
-                    )
-                )
-            ]
-            [ text target ]
-    else
-        a
-            [ class "badge badge-secondary"
-            , href "#"
-            , onClickPreventDefault (OnSort (Sorting target sorting.direction))
-            ]
-            [ text target ]
-
-
-searchInput : String -> Html Msg
-searchInput str =
-    div
-        [ class "search" ]
-        [ i [ class "oi oi-magnifying-glass" ] []
-        , input [ type_ "text", class "form-control", placeholder "Search", value str, onInput OnFilter ] []
         ]

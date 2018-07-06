@@ -1,7 +1,6 @@
-module SpecList.Update exposing (..)
+module Update.SpecList exposing (..)
 
-import SpecList.Messages exposing (Msg(..))
-import SpecList.Models exposing (SpecList)
+import Models.SpecList exposing (SpecList, Msg(..))
 import Commands.Api exposing (fetchAll)
 
 

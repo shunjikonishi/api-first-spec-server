@@ -1,7 +1,7 @@
 module Models exposing (..)
 
-import SpecList.Models exposing (SpecList)
-import SpecDetail.Models exposing (SpecDetail)
+import Models.SpecList exposing (SpecList)
+import Models.SpecDetail exposing (SpecDetail)
 
 
 type alias Model =

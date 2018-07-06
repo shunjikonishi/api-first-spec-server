@@ -1,22 +1,21 @@
 module Commands.Api exposing (..)
 
 import Http
-import SpecDetail.Models exposing (specDetailDecoder)
-import SpecDetail.Messages
-import SpecListing.Models exposing (specListingArrayDecoder)
-import SpecList.Messages
+import Models.SpecDetail as SpecDetail exposing (specDetailDecoder)
+import Models.SpecList as SpecList
+import Models.SpecListing exposing (specListingArrayDecoder)
 
 
-fetchDetail : String -> Cmd SpecDetail.Messages.Msg
+fetchDetail : String -> Cmd SpecDetail.Msg
 fetchDetail filepath =
     Http.get (url.fetchDetail ++ filepath) specDetailDecoder
-        |> Http.send SpecDetail.Messages.OnFetchDetail
+        |> Http.send SpecDetail.OnFetchDetail
 
 
-fetchAll : Cmd SpecList.Messages.Msg
+fetchAll : Cmd SpecList.Msg
 fetchAll =
     Http.get url.fetchAll specListingArrayDecoder
-        |> Http.send SpecList.Messages.OnFetchAll
+        |> Http.send SpecList.OnFetchAll
 
 
 url =

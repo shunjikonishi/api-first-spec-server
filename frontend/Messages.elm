@@ -1,9 +1,9 @@
 module Messages exposing (..)
 
-import SpecList.Messages
-import SpecDetail.Messages
+import Models.SpecList as SpecList
+import Models.SpecDetail as SpecDetail
 
 
 type Msg
-    = SpecListMsg SpecList.Messages.Msg
-    | SpecDetailMsg SpecDetail.Messages.Msg
+    = SpecListMsg SpecList.Msg
+    | SpecDetailMsg SpecDetail.Msg

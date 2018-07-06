@@ -2,8 +2,7 @@ module Views.SpecDetailView exposing (detailView)
 
 import Html exposing (..)
 import Html.Attributes exposing (class)
-import SpecDetail.Models exposing (SpecDetail)
-import SpecDetail.Messages exposing (Msg(..))
+import Models.SpecDetail exposing (SpecDetail, Msg(..))
 
 
 detailView : SpecDetail -> Html Msg

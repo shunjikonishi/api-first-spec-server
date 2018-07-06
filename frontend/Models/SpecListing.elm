@@ -1,4 +1,4 @@
-module SpecListing.Models exposing (..)
+module Models.SpecListing exposing (..)
 
 import Json.Decode as Decode exposing (field)
 

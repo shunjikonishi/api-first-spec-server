@@ -6,10 +6,9 @@ import Html.Attributes.Aria exposing (ariaHidden)
 import Html.Events exposing (onInput)
 import Html.Events.Extra exposing (onClickPreventDefault)
 import Messages exposing (Msg(..))
-import SpecList.Messages
-import SpecDetail.Messages
-import SpecList.Models exposing (SpecList)
-import SpecListing.Models exposing (..)
+import Models.SpecList exposing (SpecList)
+import Models.SpecListing exposing (..)
+import Models.SpecDetail
 import List.Extra
 
 
@@ -35,12 +34,12 @@ listHeader filter =
         ]
 
 
-searchInput : String -> Html SpecList.Messages.Msg
+searchInput : String -> Html Models.SpecList.Msg
 searchInput str =
     div
         [ class "search" ]
         [ i [ class "oi oi-magnifying-glass" ] []
-        , input [ type_ "text", class "form-control", placeholder "Search", value str, onInput SpecList.Messages.OnFilter ] []
+        , input [ type_ "text", class "form-control", placeholder "Search", value str, onInput Models.SpecList.OnFilter ] []
         ]
 
 
@@ -66,6 +65,6 @@ specItem spec =
     li
         [ class "specList-item" ]
         [ a
-            [ href "#", onClickPreventDefault (SpecDetailMsg (SpecDetail.Messages.FetchDetail spec.filepath)) ]
+            [ href "#", onClickPreventDefault (SpecDetailMsg (Models.SpecDetail.FetchDetail spec.filepath)) ]
             [ text (filename spec |> String.split "." |> List.head |> Maybe.withDefault (filename spec)) ]
         ]

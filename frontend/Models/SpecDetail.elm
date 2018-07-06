@@ -1,6 +1,7 @@
-module SpecDetail.Models exposing (..)
+module Models.SpecDetail exposing (..)
 
 import Dict
+import Http
 import Json.Decode as Decode exposing (field)
 
 
@@ -49,6 +50,15 @@ type alias Rule =
     { name : String
     , param : String
     }
+
+
+
+-- Messages
+
+
+type Msg
+    = OnFetchDetail (Result Http.Error SpecDetail)
+    | FetchDetail String
 
 
 

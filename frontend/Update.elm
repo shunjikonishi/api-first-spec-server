@@ -2,8 +2,8 @@ module Update exposing (..)
 
 import Messages exposing (Msg(..))
 import Models exposing (Model)
-import SpecList.Update
-import SpecDetail.Update
+import Update.SpecList as SpecList
+import Update.SpecDetail as SpecDetail
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -12,13 +12,13 @@ update msg model =
         SpecListMsg subMsg ->
             let
                 ( updatedSpecList, cmd ) =
-                    SpecList.Update.update subMsg model.specList
+                    SpecList.update subMsg model.specList
             in
                 ( { model | specList = updatedSpecList }, Cmd.map SpecListMsg cmd )
 
         SpecDetailMsg subMsg ->
             let
                 ( updatedSpecDetail, cmd ) =
-                    SpecDetail.Update.update subMsg model.currentSpec
+                    SpecDetail.update subMsg model.currentSpec
             in
                 ( { model | currentSpec = updatedSpecDetail }, Cmd.map SpecDetailMsg cmd )

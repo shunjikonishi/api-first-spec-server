@@ -10,7 +10,7 @@ import Views.SpecDetailView exposing (detailView)
 
 layout : Model -> Html Msg
 layout model =
-    div [ class "container-fluid p-0" ]
+    div [ class "container-fluid p-0 h-100" ]
         [ navbar model
         , mainRow model
         ]
@@ -18,21 +18,21 @@ layout model =
 
 navbar : Model -> Html Msg
 navbar model =
-    nav [ class "navbar navbar-dark bg-dark" ]
+    nav [ class "navbar navbar-dark fixed-top bg-dark" ]
         [ a [ class "navbar-bland", href "/" ] [ text "API-FIRST-SPEC" ] ]
 
 
 mainRow : Model -> Html Msg
 mainRow model =
-    div [ class "row" ]
-        [ div [ class "col-4" ] [ left model ]
-        , div [ class "col-8" ] [ right model ]
+    div [ class "workspace row" ]
+        [ div [ class "col-4 left" ] [ left model ]
+        , div [ class "col-8 right" ] [ right model ]
         ]
 
 
 left : Model -> Html Msg
 left model =
-    Html.map SpecListMsg (listView model.specList)
+    listView model.specList
 
 
 right : Model -> Html Msg

@@ -5,6 +5,7 @@ export default class SpecSerializer {
 
   private processApi(api: ApiFirstSpec.Api) : SerializedApi {
     return {
+      filepath: api.filepath,
       name: api.name,
       description: api.description,
       endpoint: api.endpoint,

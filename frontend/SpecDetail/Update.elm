@@ -9,10 +9,12 @@ update : Msg -> Maybe SpecDetail -> ( Maybe SpecDetail, Cmd Msg )
 update message model =
     case message of
         OnFetchDetail (Ok newDetail) ->
-            ( Just newDetail, Cmd.none )
+            Debug.log "test1"
+                ( Just newDetail, Cmd.none )
 
         OnFetchDetail (Err error) ->
-            ( model, Cmd.none )
+            Debug.log "test2"
+                ( model, Cmd.none )
 
         FetchDetail filepath ->
             ( model, fetchDetail filepath )

@@ -10,24 +10,24 @@ type alias SpecDetail =
     , endpoint : String
     , description : Maybe String
     , urlParams : List String
-    , request : Request
-    , response : Response
+    , request : Maybe Request
+    , response : Maybe Response
     }
 
 
 type alias Request =
     { strict : Bool
     , contentType : String
-    , headers : Dict.Dict String String
-    , params : Dict.Dict String Param
+    , headers : Maybe (Dict.Dict String String)
+    , params : Maybe (Dict.Dict String Param)
     }
 
 
 type alias Response =
     { strict : Bool
     , contentType : String
-    , headers : Dict.Dict String String
-    , data : Dict.Dict String Param
+    , headers : Maybe (Dict.Dict String String)
+    , data : Maybe (Dict.Dict String Param)
     }
 
 

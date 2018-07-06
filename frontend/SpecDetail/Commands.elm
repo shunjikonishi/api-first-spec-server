@@ -25,8 +25,8 @@ specDecoder =
         (field "endpoint" Decode.string)
         (Decode.maybe <| field "description" Decode.string)
         (field "urlParams" (Decode.list Decode.string))
-        (field "request" requestDecoder)
-        (field "response" responseDecoder)
+        (Decode.maybe <| field "request" requestDecoder)
+        (Decode.maybe <| field "response" responseDecoder)
 
 
 requestDecoder : Decode.Decoder Request
@@ -34,8 +34,8 @@ requestDecoder =
     Decode.map4 Request
         (field "strict" Decode.bool)
         (field "contentType" Decode.string)
-        (field "headers" (Decode.dict Decode.string))
-        (field "params" (Decode.dict paramDecoder))
+        (Decode.maybe <| field "headers" (Decode.dict Decode.string))
+        (Decode.maybe <| field "params" (Decode.dict paramDecoder))
 
 
 responseDecoder : Decode.Decoder Response
@@ -43,8 +43,8 @@ responseDecoder =
     Decode.map4 Response
         (field "strict" Decode.bool)
         (field "contentType" Decode.string)
-        (field "headers" (Decode.dict Decode.string))
-        (field "data" (Decode.dict paramDecoder))
+        (Decode.maybe <| field "headers" (Decode.dict Decode.string))
+        (Decode.maybe <| field "data" (Decode.dict paramDecoder))
 
 
 paramDecoder : Decode.Decoder Param

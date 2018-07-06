@@ -98,6 +98,7 @@ interface SerializedResponse {
 }
 
 interface SerializedApi {
+  filepath: string;
   name: string;
   description?: string;
   endpoint: string;

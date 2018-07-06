@@ -5,7 +5,9 @@ import Html.Attributes exposing (class, title, href, type_, placeholder, value)
 import Html.Attributes.Aria exposing (ariaHidden)
 import Html.Events exposing (onInput)
 import Html.Events.Extra exposing (onClickPreventDefault)
-import SpecList.Messages exposing (Msg(..))
+import Messages exposing (Msg(..))
+import SpecList.Messages
+import SpecDetail.Messages
 import SpecList.Models exposing (SpecList)
 import SpecListing.Models exposing (..)
 import Sorting.Models exposing (Sorting, Direction(..))
@@ -22,28 +24,28 @@ listView specList =
             List.map dir specs |> List.Extra.unique
     in
         div [ class "specList" ]
-            [ listHeader specList.filter
-            , dirList dirs specs
+            [ Html.map SpecListMsg (listHeader specList.filter)
+            , Html.map SpecDetailMsg (dirList dirs specs)
             ]
 
 
-listHeader : String -> Html Msg
+listHeader : String -> Html SpecList.Messages.Msg
 listHeader filter =
     div [ class "specList-header" ]
         [ searchInput filter
         ]
 
 
-searchInput : String -> Html Msg
+searchInput : String -> Html SpecList.Messages.Msg
 searchInput str =
     div
         [ class "search" ]
         [ i [ class "oi oi-magnifying-glass" ] []
-        , input [ type_ "text", class "form-control", placeholder "Search", value str, onInput OnFilter ] []
+        , input [ type_ "text", class "form-control", placeholder "Search", value str, onInput SpecList.Messages.OnFilter ] []
         ]
 
 
-dirList : List String -> List SpecListing -> Html Msg
+dirList : List String -> List SpecListing -> Html SpecDetail.Messages.Msg
 dirList dirs specs =
     ul [ class "specList-dir-list" ]
         (List.map
@@ -52,7 +54,7 @@ dirList dirs specs =
         )
 
 
-dirItem : List SpecListing -> String -> Html Msg
+dirItem : List SpecListing -> String -> Html SpecDetail.Messages.Msg
 dirItem specs dirname =
     li [ class "specList-dir" ]
         [ span [] [ text dirname ]
@@ -60,11 +62,11 @@ dirItem specs dirname =
         ]
 
 
-specItem : SpecListing -> Html Msg
+specItem : SpecListing -> Html SpecDetail.Messages.Msg
 specItem spec =
     li
         [ class "specList-item" ]
         [ a
-            [ href "#" ]
+            [ href "#", onClickPreventDefault (SpecDetail.Messages.FetchDetail spec.filepath) ]
             [ text (filename spec |> String.split "." |> List.head |> Maybe.withDefault (filename spec)) ]
         ]

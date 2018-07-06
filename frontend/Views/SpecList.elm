@@ -10,7 +10,6 @@ import SpecList.Messages
 import SpecDetail.Messages
 import SpecList.Models exposing (SpecList)
 import SpecListing.Models exposing (..)
-import Sorting.Models exposing (Sorting, Direction(..))
 import List.Extra
 
 

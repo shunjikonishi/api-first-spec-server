@@ -2,7 +2,6 @@ module Models exposing (..)
 
 import SpecList.Models exposing (SpecList)
 import SpecDetail.Models exposing (SpecDetail)
-import Sorting.Models exposing (Sorting, Direction(..))
 
 
 type alias Model =

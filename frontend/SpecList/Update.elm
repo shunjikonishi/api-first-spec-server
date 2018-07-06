@@ -2,7 +2,6 @@ module SpecList.Update exposing (..)
 
 import SpecList.Messages exposing (Msg(..))
 import SpecList.Models exposing (SpecList)
-import Sorting.Models exposing (Sorting)
 import SpecList.Commands exposing (fetchAll)
 
 

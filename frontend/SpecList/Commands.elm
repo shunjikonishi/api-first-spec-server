@@ -4,7 +4,6 @@ import Http
 import Json.Decode as Decode exposing (field)
 import SpecListing.Models exposing (SpecListing)
 import SpecList.Messages exposing (..)
-import Sorting.Models exposing (Sorting)
 
 
 fetchAll : Cmd Msg

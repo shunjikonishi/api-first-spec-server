@@ -23,15 +23,15 @@ listView specList =
             List.map dir specs |> List.Extra.unique
     in
         div [ class "specList" ]
-            [ Html.map SpecListMsg (listHeader specList.filter)
-            , Html.map SpecDetailMsg (dirList dirs specs)
+            [ listHeader specList.filter
+            , dirList dirs specs
             ]
 
 
-listHeader : String -> Html SpecList.Messages.Msg
+listHeader : String -> Html Msg
 listHeader filter =
     div [ class "specList-header" ]
-        [ searchInput filter
+        [ Html.map SpecListMsg (searchInput filter)
         ]
 
 
@@ -44,7 +44,7 @@ searchInput str =
         ]
 
 
-dirList : List String -> List SpecListing -> Html SpecDetail.Messages.Msg
+dirList : List String -> List SpecListing -> Html Msg
 dirList dirs specs =
     ul [ class "specList-dir-list" ]
         (List.map
@@ -53,7 +53,7 @@ dirList dirs specs =
         )
 
 
-dirItem : List SpecListing -> String -> Html SpecDetail.Messages.Msg
+dirItem : List SpecListing -> String -> Html Msg
 dirItem specs dirname =
     li [ class "specList-dir" ]
         [ span [] [ text dirname ]
@@ -61,11 +61,11 @@ dirItem specs dirname =
         ]
 
 
-specItem : SpecListing -> Html SpecDetail.Messages.Msg
+specItem : SpecListing -> Html Msg
 specItem spec =
     li
         [ class "specList-item" ]
         [ a
-            [ href "#", onClickPreventDefault (SpecDetail.Messages.FetchDetail spec.filepath) ]
+            [ href "#", onClickPreventDefault (SpecDetailMsg (SpecDetail.Messages.FetchDetail spec.filepath)) ]
             [ text (filename spec |> String.split "." |> List.head |> Maybe.withDefault (filename spec)) ]
         ]

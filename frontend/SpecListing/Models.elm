@@ -1,5 +1,7 @@
 module SpecListing.Models exposing (..)
 
+import Json.Decode as Decode exposing (field)
+
 
 type alias SpecListing =
     { filepath : String
@@ -47,3 +49,22 @@ filter str spec =
             || String.contains lower (String.toLower spec.method)
             || String.contains lower (String.toLower spec.endpoint)
             || String.contains lower (String.toLower spec.filepath)
+
+
+
+-- Decoder
+
+
+specListingArrayDecoder : Decode.Decoder (List SpecListing)
+specListingArrayDecoder =
+    Decode.list specListingDecoder
+
+
+specListingDecoder : Decode.Decoder SpecListing
+specListingDecoder =
+    Decode.map5 SpecListing
+        (field "filepath" Decode.string)
+        (field "endpoint" Decode.string)
+        (field "method" Decode.string)
+        (field "name" Decode.string)
+        (Decode.maybe <| field "description" Decode.string)

@@ -5,6 +5,7 @@ import Html.Attributes exposing (class, href)
 import Messages exposing (Msg(..))
 import Models exposing (Model)
 import Views.SpecList exposing (listView)
+import Views.SpecDetailView exposing (detailView)
 
 
 layout : Model -> Html Msg
@@ -36,4 +37,14 @@ left model =
 
 right : Model -> Html Msg
 right model =
-    div [] []
+    case model.currentSpec of
+        Just spec ->
+            Html.map SpecDetailMsg (detailView spec)
+
+        Nothing ->
+            hello
+
+
+hello : Html Msg
+hello =
+    div [] [ text "Hello api-sirst-spec" ]

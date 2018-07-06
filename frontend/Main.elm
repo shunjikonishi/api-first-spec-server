@@ -5,7 +5,7 @@ import Messages exposing (Msg(..))
 import Models exposing (Model, initialModel)
 import Update exposing (update)
 import View exposing (view)
-import SpecList.Commands exposing (fetchAll)
+import Commands.Api exposing (fetchAll)
 
 
 init : ( Model, Cmd Msg )

@@ -2,7 +2,7 @@ module SpecList.Update exposing (..)
 
 import SpecList.Messages exposing (Msg(..))
 import SpecList.Models exposing (SpecList)
-import SpecList.Commands exposing (fetchAll)
+import Commands.Api exposing (fetchAll)
 
 
 update : Msg -> SpecList -> ( SpecList, Cmd Msg )

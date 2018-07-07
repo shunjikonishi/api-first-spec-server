@@ -11,7 +11,7 @@ type alias SpecDetail =
     , method : String
     , endpoint : String
     , description : Maybe String
-    , urlParams : List String
+    , urlParams : Maybe (List String)
     , request : Maybe Request
     , response : Maybe Response
     }
@@ -48,8 +48,14 @@ type ParamChild
 
 type alias Rule =
     { name : String
-    , param : String
+    , param : RuleParam
     }
+
+
+type RuleParam
+    = IntRuleParam Int
+    | StringRuleParam String
+    | BoolRuleParam Bool
 
 
 
@@ -73,7 +79,7 @@ specDetailDecoder =
         (field "method" Decode.string)
         (field "endpoint" Decode.string)
         (Decode.maybe <| field "description" Decode.string)
-        (field "urlParams" (Decode.list Decode.string))
+        (Decode.maybe <| field "urlParams" (Decode.list Decode.string))
         (Decode.maybe <| field "request" requestDecoder)
         (Decode.maybe <| field "response" responseDecoder)
 
@@ -113,6 +119,60 @@ paramChildDecoder =
 
 ruleDecoder : Decode.Decoder Rule
 ruleDecoder =
+    field "name" Decode.string
+        |> Decode.andThen ruleParamDecoder
+
+
+ruleParamDecoder : String -> Decode.Decoder Rule
+ruleParamDecoder name =
+    case name of
+        "required" ->
+            boolRuleDecoder
+
+        "requiredAllowEmptyString" ->
+            boolRuleDecoder
+
+        "email" ->
+            boolRuleDecoder
+
+        "url" ->
+            boolRuleDecoder
+
+        "min" ->
+            intRuleDecoder
+
+        "max" ->
+            intRuleDecoder
+
+        "minlength" ->
+            intRuleDecoder
+
+        "maxllength" ->
+            intRuleDecoder
+
+        "pattern" ->
+            stringRuleDecoder
+
+        _ ->
+            stringRuleDecoder
+
+
+boolRuleDecoder : Decode.Decoder Rule
+boolRuleDecoder =
     Decode.map2 Rule
         (field "name" Decode.string)
-        (field "param" Decode.string)
+        (Decode.map BoolRuleParam (field "param" Decode.bool))
+
+
+intRuleDecoder : Decode.Decoder Rule
+intRuleDecoder =
+    Decode.map2 Rule
+        (field "name" Decode.string)
+        (Decode.map IntRuleParam (field "param" Decode.int))
+
+
+stringRuleDecoder : Decode.Decoder Rule
+stringRuleDecoder =
+    Decode.map2 Rule
+        (field "name" Decode.string)
+        (Decode.map StringRuleParam (field "param" Decode.string))

@@ -18,7 +18,14 @@ fetchAll =
         |> Http.send SpecList.OnFetchAll
 
 
+reset : Cmd SpecList.Msg
+reset =
+    Http.post url.resetSpecs Http.emptyBody specListingArrayDecoder
+        |> Http.send SpecList.OnFetchAll
+
+
 url =
     { fetchDetail = "/api/specs"
     , fetchAll = "/api/specs"
+    , resetSpecs = "/api/reset"
     }

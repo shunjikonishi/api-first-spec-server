@@ -17,9 +17,13 @@ export default function(specList: SpecList, req: Request, res: Response) {
         av = a.method + a.name;
         bv = b.method + b.name;
         break;
-      default:
+      case "endpoint":
         av = a.endpoint;
         bv = b.endpoint;
+        break;
+      default:
+        av = a.filepath || a.name;
+        bv = b.filepath || a.name;
         break;
     }
     let result = av.localeCompare(bv);

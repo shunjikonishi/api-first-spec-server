@@ -20,19 +20,24 @@ export default class SpecList {
     this.load();
   }
 
-  public load() {
+  public load(): Promise<Array<ApiFirstSpec.Api>> {
     this.specList = [];
-    const walker = walk.walk(this.baseDir.substring(0, this.baseDir.length - 1), {
-      followLink: false
-    });
-    walker.on("file", (root: string, stat: any, next: () => void) => {
-      if (stat.name.endsWith(".spec.js")) {
-        const path = `${root}/${stat.name}`;
-        const api = require(path);
-        api.filepath = path.substring(this.baseDir.length - 1);
-        this.specList.push(api);
-      }
-      next();
+    return new Promise(resolve => {
+      const walker = walk.walk(this.baseDir.substring(0, this.baseDir.length - 1), {
+        followLink: false
+      });
+      walker.on("file", (root: string, stat: any, next: () => void) => {
+        if (stat.name.endsWith(".spec.js")) {
+          const path = `${root}/${stat.name}`;
+          const api = require(path);
+          api.filepath = path.substring(this.baseDir.length - 1);
+          this.specList.push(api);
+        }
+        next();
+      });
+      walker.on("end", () => {
+        resolve(this.specList);
+      });
     });
   }
 

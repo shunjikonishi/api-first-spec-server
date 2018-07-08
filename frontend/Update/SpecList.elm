@@ -1,7 +1,7 @@
 module Update.SpecList exposing (..)
 
 import Models.SpecList exposing (SpecList, Msg(..))
-import Commands.Api exposing (fetchAll)
+import Commands.Api exposing (reset)
 
 
 update : Msg -> SpecList -> ( SpecList, Cmd Msg )
@@ -15,3 +15,6 @@ update message model =
 
         OnFilter str ->
             ( { model | filter = str }, Cmd.none )
+
+        Reset ->
+            ( model, reset )

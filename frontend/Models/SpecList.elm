@@ -13,3 +13,4 @@ type alias SpecList =
 type Msg
     = OnFetchAll (Result Http.Error (List SpecListing))
     | OnFilter String
+    | Reset

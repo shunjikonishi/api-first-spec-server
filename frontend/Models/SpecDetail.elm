@@ -12,8 +12,8 @@ type alias SpecDetail =
     , endpoint : String
     , description : Maybe String
     , urlParams : Maybe (List String)
-    , request : Maybe Request
-    , response : Maybe Response
+    , request : Request
+    , response : Response
     }
 
 
@@ -59,6 +59,20 @@ type RuleParam
 
 
 
+-- Method
+
+
+hasUrlParams : SpecDetail -> Bool
+hasUrlParams spec =
+    case spec.urlParams of
+        Just v ->
+            List.isEmpty v |> not
+
+        Nothing ->
+            False
+
+
+
 -- Messages
 
 
@@ -80,8 +94,8 @@ specDetailDecoder =
         (field "endpoint" Decode.string)
         (Decode.maybe <| field "description" Decode.string)
         (Decode.maybe <| field "urlParams" (Decode.list Decode.string))
-        (Decode.maybe <| field "request" requestDecoder)
-        (Decode.maybe <| field "response" responseDecoder)
+        (field "request" requestDecoder)
+        (field "response" responseDecoder)
 
 
 requestDecoder : Decode.Decoder Request

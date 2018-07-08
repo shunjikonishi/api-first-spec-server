@@ -5,7 +5,7 @@ export default class SpecSerializer {
 
   private processApi(api: ApiFirstSpec.Api) : SerializedApi {
     return {
-      filepath: api.filepath,
+      filepath: api.filepath || "",
       name: api.name,
       description: api.description,
       endpoint: api.endpoint,
@@ -40,8 +40,8 @@ export default class SpecSerializer {
     return result;
   }
 
-  private processParams(params: ApiFirstSpec.Param): SerializedParamHolder {
-    const result: SerializedParamHolder = {};
+  private processParams(params: ApiFirstSpec.Param): Array<SerializedParam> {
+    const result: Array<SerializedParam> = [];
     params.childNames().forEach(key => {
       const child = params.getChild(key);
       const serializedChild: SerializedParam = {
@@ -53,7 +53,7 @@ export default class SpecSerializer {
       if (child.hasChildren()) {
         serializedChild.children = this.processParams(child);
       }
-      result[key] = serializedChild;
+      result.push(serializedChild);
     });
     return result;
   }
@@ -65,6 +65,9 @@ export default class SpecSerializer {
     };
     if (typeof (rule.param) === "function") {
       result.param = rule.param.toString();
+    }
+    if (rule.name === "list") {
+      result.param = "[ " + rule.param.join(", ") + " ]";
     }
     return result;
   }

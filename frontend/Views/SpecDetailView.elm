@@ -2,7 +2,7 @@ module Views.SpecDetailView exposing (detailView)
 
 import Html exposing (..)
 import Html.Attributes exposing (class, colspan)
-import Models.SpecDetail exposing (SpecDetail, Request, Response, Param, Msg(..))
+import Models.SpecDetail exposing (SpecDetail, Request, Response, Param, ParamChild(..), Msg(..))
 import Dict
 
 
@@ -62,6 +62,7 @@ requestBlock request =
     [ headerRow "Request"
     , normalRow "Content-Type" request.contentType
     , headersRow request.headers
+    , paramRow "params" request.params
     ]
 
 
@@ -70,6 +71,7 @@ responseBlock response =
     [ headerRow "Response"
     , normalRow "Content-Type" response.contentType
     , headersRow response.headers
+    , paramRow "data" response.data
     ]
 
 
@@ -91,19 +93,41 @@ dictCell dict =
     table [] [ tbody [] (List.map tupleRow (Dict.toList dict)) ]
 
 
-paramRow : String -> Maybe Param -> Html Msg
+paramRow : String -> Maybe (List ParamChild) -> Html Msg
 paramRow name param =
     case param of
-        Just v ->
+        Just list ->
             tr []
                 [ th [] [ text name ]
-                , td [] [ ul [] [ paramCell v ] ]
+                , td [] [ ul [] (List.map paramChildCell list) ]
                 ]
 
         Nothing ->
             normalRowWithVisible name "" False
 
 
+paramChildCell : ParamChild -> Html Msg
+paramChildCell paramChild =
+    case paramChild of
+        ParamChild param ->
+            paramCell param
+
+
 paramCell : Param -> Html Msg
 paramCell param =
-    div [] []
+    let
+        value =
+            if param.isArray then
+                param.name ++ ": Array<" ++ param.type_ ++ ">"
+            else
+                param.name ++ ": " ++ param.type_
+
+        items =
+            case param.children of
+                Just list ->
+                    [ text value, ul [] (List.map paramChildCell list) ]
+
+                Nothing ->
+                    [ text value ]
+    in
+        li [] items

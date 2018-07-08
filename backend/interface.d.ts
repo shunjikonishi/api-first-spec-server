@@ -76,25 +76,21 @@ interface SerializedParam {
   type: string;
   isArray: boolean;
   rules?: Array<ApiFirstSpec.Rule>;
-  children?: SerializedParamHolder;
-}
-
-interface SerializedParamHolder {
-  [key: string]: SerializedParam;
+  children?: Array<SerializedParam>;
 }
 
 interface SerializedRequest {
   strict: boolean;
   contentType: string;
   headers?: any;
-  params?: SerializedParamHolder;
+  params?: Array<SerializedParam>;
 }
 
 interface SerializedResponse {
   strict: boolean;
   contentType: string;
   headers?: any;
-  data?: SerializedParamHolder;
+  data?: Array<SerializedParam>;
 }
 
 interface SerializedApi {

@@ -21,7 +21,7 @@ type alias Request =
     { strict : Bool
     , contentType : String
     , headers : Maybe (Dict.Dict String String)
-    , params : Maybe (Dict.Dict String Param)
+    , params : Maybe (List ParamChild)
     }
 
 
@@ -29,7 +29,7 @@ type alias Response =
     { strict : Bool
     , contentType : String
     , headers : Maybe (Dict.Dict String String)
-    , data : Maybe (Dict.Dict String Param)
+    , data : Maybe (List ParamChild)
     }
 
 
@@ -38,7 +38,7 @@ type alias Param =
     , type_ : String
     , isArray : Bool
     , rules : List Rule
-    , children : Dict.Dict String ParamChild
+    , children : Maybe (List ParamChild)
     }
 
 
@@ -104,7 +104,7 @@ requestDecoder =
         (field "strict" Decode.bool)
         (field "contentType" Decode.string)
         (Decode.maybe <| field "headers" (Decode.dict Decode.string))
-        (Decode.maybe <| field "params" (Decode.dict paramDecoder))
+        (Decode.maybe <| field "params" (Decode.list paramChildDecoder))
 
 
 responseDecoder : Decode.Decoder Response
@@ -113,7 +113,12 @@ responseDecoder =
         (field "strict" Decode.bool)
         (field "contentType" Decode.string)
         (Decode.maybe <| field "headers" (Decode.dict Decode.string))
-        (Decode.maybe <| field "data" (Decode.dict paramDecoder))
+        (Decode.maybe <| field "data" (Decode.list paramChildDecoder))
+
+
+paramChildDecoder : Decode.Decoder ParamChild
+paramChildDecoder =
+    Decode.map ParamChild (Decode.lazy (\_ -> paramDecoder))
 
 
 paramDecoder : Decode.Decoder Param
@@ -123,12 +128,7 @@ paramDecoder =
         (field "type" Decode.string)
         (field "isArray" Decode.bool)
         (field "rules" (Decode.list ruleDecoder))
-        (field "children" (Decode.dict paramChildDecoder))
-
-
-paramChildDecoder : Decode.Decoder ParamChild
-paramChildDecoder =
-    Decode.map ParamChild (Decode.lazy (\_ -> paramDecoder))
+        (Decode.maybe <| field "children" (Decode.list paramChildDecoder))
 
 
 ruleDecoder : Decode.Decoder Rule

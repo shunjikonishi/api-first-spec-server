@@ -2,7 +2,7 @@ module Views.SpecDetailView exposing (detailView)
 
 import Html exposing (..)
 import Html.Attributes exposing (class, colspan)
-import Models.SpecDetail exposing (SpecDetail, Request, Response, Msg(..))
+import Models.SpecDetail exposing (SpecDetail, Request, Response, Param, Msg(..))
 import Dict
 
 
@@ -79,13 +79,31 @@ headersRow headers =
         Just kv ->
             tr []
                 [ th [] [ text "haeders" ]
-                , td [] [ dictValue kv ]
+                , td [] [ dictCell kv ]
                 ]
 
         Nothing ->
             normalRowWithVisible "headers" "" False
 
 
-dictValue : Dict.Dict String String -> Html Msg
-dictValue dict =
+dictCell : Dict.Dict String String -> Html Msg
+dictCell dict =
     table [] [ tbody [] (List.map tupleRow (Dict.toList dict)) ]
+
+
+paramRow : String -> Maybe Param -> Html Msg
+paramRow name param =
+    case param of
+        Just v ->
+            tr []
+                [ th [] [ text name ]
+                , td [] [ ul [] [ paramCell v ] ]
+                ]
+
+        Nothing ->
+            normalRowWithVisible name "" False
+
+
+paramCell : Param -> Html Msg
+paramCell param =
+    div [] []

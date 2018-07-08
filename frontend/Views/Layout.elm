@@ -4,7 +4,7 @@ import Html exposing (Html, div, nav, text, a)
 import Html.Attributes exposing (class, href)
 import Messages exposing (Msg(..))
 import Models exposing (Model)
-import Views.SpecList exposing (listView)
+import Views.SpecListView exposing (listView)
 import Views.SpecDetailView exposing (detailView)
 
 

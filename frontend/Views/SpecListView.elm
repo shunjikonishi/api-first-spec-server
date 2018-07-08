@@ -1,4 +1,4 @@
-module Views.SpecList exposing (listView)
+module Views.SpecListView exposing (listView)
 
 import Html exposing (..)
 import Html.Attributes exposing (class, title, href, type_, placeholder, value)

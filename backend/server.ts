@@ -8,7 +8,7 @@ const app = express();
 
 process.env.API_FIRST_SPEC_SKIP_TEST = "true";
 
-const specDir = process.env.SPEC_DIR || "./spec";
+const specDir = process.env.SPEC_DIR || "./specs";
 const specList = new SpecList(specDir);
 
 app.set("views", "backend/views");

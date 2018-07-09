@@ -63,11 +63,10 @@ export default class SpecSerializer {
       name: rule.name,
       param: rule.param
     };
-    if (typeof (rule.param) === "function") {
-      result.param = rule.param.toString();
-    }
     if (rule.name === "list") {
       result.param = "[ " + rule.param.join(", ") + " ]";
+    } else if (typeof rule.param !== "string") {
+      result.param = rule.param.toString();
     }
     return result;
   }

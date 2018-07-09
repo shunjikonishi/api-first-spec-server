@@ -12,4 +12,5 @@ html, body {
 .left, .right {
   height: calc(100% - #{$header-height});
   overflow: scroll;
+  padding: 0;
 }

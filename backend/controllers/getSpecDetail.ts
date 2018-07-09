@@ -5,7 +5,8 @@ import {Request, Response} from "express";
 const serializer = new SpecSerializer();
 
 export default function(specList: SpecList, req: Request, res: Response) {
-  const spec = specList.getSpecByFilepath(req.path);
+  console.log(req.path);
+  const spec = specList.getSpecByFilepath(req.path.substring("/specs".length));
   if (!spec) {
     res.sendStatus(404);
     return;

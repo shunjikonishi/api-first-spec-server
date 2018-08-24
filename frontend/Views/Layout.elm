@@ -7,6 +7,7 @@ import Messages exposing (Msg(..))
 import Models exposing (Model)
 import Views.SpecListView exposing (listView)
 import Views.SpecDetailView exposing (detailView)
+import Views.Hello exposing (hello)
 import Models.SpecList as SpecList
 
 
@@ -29,8 +30,8 @@ navbar model =
 mainRow : Model -> Html Msg
 mainRow model =
     div [ class "workspace row" ]
-        [ div [ class "col-4 left" ] [ left model ]
-        , div [ class "col-8 right" ] [ right model ]
+        [ div [ class "col-3 left" ] [ left model ]
+        , div [ class "col-9 right" ] [ right model ]
         ]
 
 
@@ -47,8 +48,3 @@ right model =
 
         Nothing ->
             hello
-
-
-hello : Html Msg
-hello =
-    div [] [ text "Hello api-sirst-spec" ]

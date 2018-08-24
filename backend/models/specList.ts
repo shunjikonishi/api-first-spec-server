@@ -14,6 +14,9 @@ export default class SpecList {
 
   constructor(dir: string) {
     this.baseDir = path.normalize(dir);
+    if (!path.isAbsolute(this.baseDir)) {
+      this.baseDir = process.cwd() + "/" + this.baseDir;
+    }
     if (!this.baseDir.endsWith("/")) {
       this.baseDir += "/";
     }

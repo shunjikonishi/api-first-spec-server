@@ -47,7 +47,7 @@ normalRowWithVisible key value visible =
                 "hidden"
             )
         ]
-        [ th [] [ text key ], td [] [ text value ] ]
+        [ th [ class "name-col" ] [ text key ], td [] [ text value ] ]
 
 
 headerRow : String -> Html Msg
@@ -98,7 +98,7 @@ paramRow name param =
     case param of
         Just list ->
             tr []
-                [ th [] [ text name ]
+                [ th [ class "name-col" ] [ text name ]
                 , td [] [ ul [] (List.map paramChildCell list) ]
                 ]
 

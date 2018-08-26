@@ -3,6 +3,11 @@ declare module "walk" {
   export = module;
 }
 
+declare module "simple-git" {
+  var module: any;
+  export = module;
+}
+
 declare namespace ApiFirstSpec {
 
   interface ApiConfig {

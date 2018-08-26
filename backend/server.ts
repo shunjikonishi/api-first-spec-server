@@ -9,13 +9,16 @@ const app = express();
 process.env.API_FIRST_SPEC_SKIP_TEST = "true";
 
 const specDir = process.env.SPEC_DIR || "./specs";
+const gitUrl = process.env.GIT_URL || null;
+const gitBranch = process.env.GIT_BRANCH || "master";
+
 const specList = new SpecList(specDir);
 
 app.set("views", "backend/views");
 app.set("view engine", "ejs");
 app.use("/assets", express.static("assets"));
 
-app.use("/api", specApi(specList));
+app.use("/api", specApi(specList, gitUrl, gitBranch));
 
 app.get("/*", (req, res) => {
   res.render("index", {

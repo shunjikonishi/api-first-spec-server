@@ -14,26 +14,8 @@
   },
   "devDependencies": {
     "@types/express": "^4.11.1",
-    "css-loader": "^0.28.11",
-    "elm-webpack-loader": "^4.5.0",
-    "grunt": "^1.0.3",
-    "grunt-contrib-watch": "^1.1.0",
-    "grunt-express-server": "^0.5.4",
-    "grunt-shell": "^2.1.0",
-    "grunt-ts": "^6.0.0-beta.19",
-    "grunt-tslint": "^5.0.2",
-    "grunt-webpack": "^3.1.2",
-    "import-glob-loader": "^1.1.0",
-    "load-grunt-tasks": "^4.0.0",
-    "mini-css-extract-plugin": "^0.4.0",
-    "node-sass": "^4.9.0",
-    "sass-loader": "^7.0.3",
-    "style-loader": "^0.21.0",
-    "time-grunt": "^1.4.0",
-    "ts-loader": "^4.3.0",
     "tslint": "^5.10.0",
-    "typescript": "^2.8.3",
-    "webpack": "^4.12.0"
+    "typescript": "^2.8.3"
   },
   "dependencies": {
     "api-first-spec": "^1.0.3",

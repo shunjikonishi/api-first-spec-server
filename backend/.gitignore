@@ -2,5 +2,5 @@ elm-stuff/
 .tscache/
 node_modules/
 dist/
-assets/bundle.*
+assets/
 work/
